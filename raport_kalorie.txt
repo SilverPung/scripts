@@ -1,0 +1,11 @@
+Raport Kalorii
+--------------
+Imię: rkz
+Płeć: Kobieta
+Wiek: 123 lat
+Waga: 4 kg
+Wzrost: 23 cm
+-
+-
+Twoje BMR wynosi: 23.25 kcal
+Dzienne zapotrzebowanie kaloryczne (poziom aktywności: Lekka aktywność): 31.96 kcal
