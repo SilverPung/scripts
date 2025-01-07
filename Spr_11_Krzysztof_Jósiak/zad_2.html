@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Kalkulator Dodawanie</title>
+<script>
+function sprawdz(){
+var x = document.getElementById("pierwsza").value;
+var y = document.getElementById("druga").value;
+
+if (isNaN(x) || isNaN(y)){
+    alert("Podaj liczby");
+    return;
+}
+if (x == "" || y == ""){
+    alert("Podaj liczby");
+    return;
+}
+dodaj(x, y);
+
+}
+function dodaj(x, y){
+    var wynik = parseInt(x) + parseInt(y);
+    document.getElementsByClassName("wynik")[0].innerHTML = wynik;
+
+
+}
+</script>
+</head>
+<body>
+<label for = "number1"></label><input type="text"
+id="pierwsza" value=""> +
+<input type="text"
+id="druga" value="">
+<button id="submit" onclick="sprawdz();">=</button>
+<h1 class="wynik"></h1>
+</body>
+</html>

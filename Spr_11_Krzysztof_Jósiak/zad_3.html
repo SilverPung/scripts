@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>Inkrementator</title>
+<script>
+var zmienna = 0;
+function increaseCount(){
+    zmienna++;
+    document.getElementById("currentCount").innerHTML = zmienna;
+}
+function reset(){
+    zmienna = 0;
+    document.getElementById("currentCount").innerHTML = zmienna;
+} 
+</script>
+</head>
+<body>
+<h1>Inkrementator</h1>
+<p>Licznik <span id="currentCount">0</span></p>
+<button id="incrementButton" >Inkrementuj</button>
+<button id="resetButton" onclick="reset()">Reset</button>
+
+<script>
+    document.getElementById("incrementButton").addEventListener("mouseover", increaseCount);
+    // użyłem mouseover, bo czesto jej używam i jest wygodniej
+</script>
+
+</body>
+</html>

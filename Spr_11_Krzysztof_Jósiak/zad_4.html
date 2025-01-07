@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lista</title>
+</head>
+<body>
+<h1 id="title">Lista</h1>
+<form>
+<input type="text" id="user-todo" placeholder="Lista" required>
+</form>
+<h2 id="todo-header">Rzeczy:</h2>
+<ul>
+</ul>
+<button id="clear">Reset</button>
+<script>
+
+document.getElementById("clear").addEventListener("click", function(){
+document.getElementsByTagName("ul")[0].innerHTML = "";
+});
+
+document.getElementById("user-todo").addEventListener("keydown", function(event){
+if (event.key === "Enter") {
+    event.preventDefault(); // niewiem czemu lecz preventDefault() nie działał mi więc dodałem if statement
+    if (document.getElementById("user-todo").value === "") {
+        alert("Podaj rzecz do zrobienia");
+        return;
+    }
+    var x = document.getElementById("user-todo").value;
+    var li = document.createElement("li");
+    li.innerHTML = x;
+    document.querySelector("ul").appendChild(li);
+    document.getElementById("user-todo").value = ""; // Clear the input field
+}
+});
+</script>
+</body>
+</html>

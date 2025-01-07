@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lista</title>
+</head>
+<body>
+<h1 id="title">Podaj ciąg znaków</h1>
+<form>
+<input type="text" id="user-input" required>
+</form>
+<h1 id=colorfulString></h1>
+<script>
+
+colors=["#FF0000", "#FFA500", "#FFFF00", "#008000", "#0000FF", "#4B0082", "#EE82EE"];
+
+
+document.getElementById("user-input").addEventListener("keydown", function(event){
+if (event.key === "Enter") {
+    event.preventDefault(); // niewiem czemu lecz preventDefault() nie działał mi więc dodałem if statement
+    if (document.getElementById("user-input").value === "") {
+        alert("Podaj rzecz do zrobienia");
+        return;
+    }
+    var x = document.getElementById("user-input").value;
+    var y = x.split("")
+    for(var i=0;i < y.length;i++)
+    {
+        y[i] = '<span class="letter">' + y[i] + '</span>';
+        console.log(y[i]);
+
+    }
+    document.getElementById("colorfulString").innerHTML = y.join("");
+    
+}
+});
+setInterval(function(){
+    var x = document.getElementsByClassName("letter")
+
+    for(i=0;i<x.length;i++)
+    {
+        var randomColor = colors[Math.floor(Math.random() * colors.length)];
+        x[i].style.color = randomColor;
+    }
+
+
+    //console.log(x)
+    
+}, 1000); 
+
+//wiem zrobiłem to bardzo naokoło ale szczerze nie wiem jak to zrobić inaczej
+
+</script>
+</body>
+</html>
