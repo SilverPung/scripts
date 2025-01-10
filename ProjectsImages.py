@@ -9,11 +9,11 @@ class ProjectsImages:
         self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
         self.trail_points = []
         self.trail_duration = 2
-        self.color_lower = (0, 80, 0)
-        self.color_upper = (120, 255, 80)
-        self.ball_size= 250
+        # Define the color range in HSV format
+        self.color_lower = (25, 90, 90)  # Example: lower bound for green color in HSV
+        self.color_upper = (85, 255, 255)  # Example: upper bound for green color in HSV
+        self.ball_size = 200
         
-
 
     def faceDetection(self):
         # Open a connection to the webcam (0 is the default camera)
@@ -108,6 +108,13 @@ class ProjectsImages:
         cap.release()
         cv2.destroyAllWindows()
 
+    def findBall(self, frame):
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        hsv[:, :, 2] = cv2.equalizeHist(hsv[:, :, 2])
+        mask = cv2.inRange(hsv, self.color_lower, self.color_upper)
+        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        return contours
+
     def ballTracking(self):
         # Open a connection to the webcam (0 is the default camera)
         cap = cv2.VideoCapture(0)
@@ -124,12 +131,7 @@ class ProjectsImages:
                 print("Error: Could not read frame.")
                 break
 
-
-
-            mask = cv2.inRange(frame, self.color_lower, self.color_upper)
-
-            # Find contours in the mask
-            contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            contours = self.findBall(frame)
 
             # Draw rectangles around the detected objects
             for contour in contours:
@@ -151,7 +153,7 @@ class ProjectsImages:
         cv2.destroyAllWindows()
 
     def ballTrailing(self):
-        # Open a connection to the webcam (0 is the default camera)
+    # Open a connection to the webcam (0 is the default camera)
         cap = cv2.VideoCapture(0)
 
         if not cap.isOpened():
@@ -166,11 +168,7 @@ class ProjectsImages:
                 print("Error: Could not read frame.")
                 break
 
-            # Define the color range for the object (e.g., a green ball)
-            mask = cv2.inRange(frame, self.color_lower, self.color_upper)
-
-            # Find contours in the mask
-            contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            contours = self.findBall(frame)
 
             # Draw rectangles around the detected objects
             for contour in contours:
