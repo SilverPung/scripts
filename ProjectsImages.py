@@ -142,4 +142,4 @@ class BallDetection(WebcamBase):
 if __name__ == "__main__":
 
     bd = BallDetection()
-    bd.ballTrailing()
+    bd.ballTracking()

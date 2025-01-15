@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Pobieranie danych w JSON</title>
+
+<body>
+<form id="myForm">
+<button id="myButton" type="button"onclick="zaladuj();">Zaladuj</button>
+</form>
+<h1>Laboratorium</h1>
+<div id="laboratorium"></div>
+<h2>Prowadzacy</h2>
+<div id="prowadzacy"></div>
+<h2>Temat</h2>
+<div id="temat"></div>
+<h2>Rok</h2>
+<div id="rok"></div>
+<script>
+
+function zaladuj(){
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET",'plik.json',true);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            var json = JSON.parse(xhr.responseText);
+            document.getElementById("laboratorium").innerHTML = json.laboratorium;
+            document.getElementById("prowadzacy").innerHTML = json.prowadzacy;
+            document.getElementById("temat").innerHTML = json.temat;
+            document.getElementById("rok").innerHTML = json.rok;
+        }
+    };
+    xhr.send();
+}
+</script>
+</body>
+</html>
+</head>

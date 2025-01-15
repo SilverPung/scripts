@@ -6,11 +6,11 @@ function sprawdz(){
 var x = document.getElementById("pierwsza").value;
 var y = document.getElementById("druga").value;
 
-if (isNaN(x) || isNaN(y)){
+if (isNaN(x) || isNaN(y)){//sprawdzamy czy podane dane są liczbami
     alert("Podaj liczby");
     return;
 }
-if (x == "" || y == ""){
+if (x == "" || y == ""){//sprawdzamy czy pole jest puste
     alert("Podaj liczby");
     return;
 }

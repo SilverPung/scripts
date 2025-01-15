@@ -7,7 +7,7 @@ width: 100px;
 height: 100px;
 background-color: #333;
 position: absolute;
-left: 0px;
+left: 100px;
 top: 100px;
 }
 </style>
@@ -20,20 +20,29 @@ top: 100px;
 
 <script>
     
+const cssLeft = parseInt(getComputedStyle(document.getElementById('square')).left);
+
+
 function movesquare(){
+    
 
-    var square = document.getElementById("square");
-    var left = square.style.left;
+    const square = document.getElementById('square');
+        var left = ((square.style.left) ? parseInt(square.style.left) : 0) + cssLeft;
+        const interval = 500;
+        const moveDistance = 10; 
+        var count = 0;
+        const maxCount = 10;
 
-    for(var i=10;i<=100;i=i+10){
-
-        
-        console.log(i);
-        setTimeout(() => {
-            square.style.left = left + i; 
-        }, 500);
-
-    }
+        const intervalId = setInterval(() => {
+            if (count < maxCount) {
+                left += moveDistance;
+                square.style.left = left + 'px';
+                count++;
+            } else {
+                clearInterval(intervalId);
+            }
+        }, interval);
+    
 }
 </script>
 </body>
