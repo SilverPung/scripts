@@ -31,8 +31,8 @@ class WebcamBase:
 class FaceDetection(WebcamBase):
     
     def __init__(self):
-        # Załaduj wstępnie wytrenowany klasyfikator Haar Cascade do wykrywania twarzy
-        self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+        # Wczytany model do wyhrywania twarzy , jeden z prostrzych ale dla lepszego wyniku można używac większych
+        self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_alt2.xml')
 
     def faceDetection(self):
         cap = self.openWebcam()
@@ -56,27 +56,15 @@ class FaceDetection(WebcamBase):
         def blur_faces(frame):
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             faces = self.face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
-            merged_faces = self.mergeOverlappingFaces(faces)
-            for (x, y, w, h) in merged_faces:
-                face = frame[y:y+h, x:x+w]
-                face = cv2.GaussianBlur(face, (99, 99), 30)
-                frame[y:y+face.shape[0], x:x+face.shape[1]] = face
+            for (x, y, w, h) in faces:
+                face_region = frame[y:y+h, x:x+w]
+                face_region = cv2.GaussianBlur(face_region, (99, 99), 30)
+                frame[y:y+h, x:x+w] = face_region
+
             cv2.imshow('Webcam Video', frame)
 
         self.processFrame(cap, blur_faces)
 
-    def mergeOverlappingFaces(self, faces):
-        merged_faces = []
-        for (x, y, w, h) in faces:
-            merged = False
-            for i, (mx, my, mw, mh) in enumerate(merged_faces):
-                if (x < mx + mw and x + w > mx and y < my + mh and y + h > my):
-                    merged_faces[i] = (min(x, mx), min(y, my), max(x + w, mx + mw) - min(x, mx), max(y + h, my + mh) - min(y, my))
-                    merged = True
-                    break
-            if not merged:
-                merged_faces.append((x, y, w, h))
-        return merged_faces
 
 class BallDetection(WebcamBase):
     
@@ -141,5 +129,5 @@ class BallDetection(WebcamBase):
 
 if __name__ == "__main__":
 
-    bd = BallDetection()
-    bd.ballTracking()
+    fd = FaceDetection()
+    fd.faceDetection()
