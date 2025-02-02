@@ -1,0 +1,26 @@
+<html>
+<head></head>
+<body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("p").hover(// dla każdego elemetu p bo * zadziała tez dla body a tego raczej nie chcemy, bo chyba ot chodziło przynajmniej tak zrozumiał
+            function() {
+                const originalColor = $(this).css("background-color");
+                $(this).data("originalColor", originalColor);
+
+                $(this).css("background-color", "#00FF00"); 
+            },
+            function() {
+
+                const originalColor = $(this).data("originalColor");
+
+                $(this).css("background-color", originalColor);
+            }
+        );
+    });
+</script>
+<p id="pierwszy" class="przyklad" style="float:left; width:100px; background-color:#CCC; margin:15px; padding:15px;">Paragraf A</p>
+<p id="drugi" class="przyklad" style="float:left; width:100px; background-color:#CCC; margin:15px; padding:15px;">Paragraf B</p>
+</body>
+</html>

@@ -2,15 +2,16 @@
 <head>
 </head>
 <body>
-<script type="text/javascript" src="jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-jQuery("img").click(function(event){
-alert("jQuery hello world");
-event.preventDefault();
-});
+    $("button").click(function(){
+        $("img").attr({src: 'http://wtie.utp.edu.pl/wp-content/themes/wtiie/images/WTIE.png'});
+        //nwm czemu ale nie widzi mi obrazka ale zmienia src więc chyba jest dobrze
+    });
 });
 </script>
+<button>Change Image</button>
 <img src="http://www.cpe-powereng2016.utp.edu.pl/wp-content/uploads/2015/05/pl_UTP_godlo.png"/>
 </body>
 </html>

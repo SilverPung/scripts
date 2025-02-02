@@ -1,0 +1,34 @@
+<html>
+<head></head>
+<body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $("#pierwszy").hover(
+        function() { 
+            const currentText = $(this).text();
+            const otherText = $("#drugi").text();
+            $(this).data("originalText", currentText).text(otherText);
+        },
+        function() { 
+            const originalText = $(this).data("originalText");
+            $(this).text(originalText);
+        }
+    );
+    $("#drugi").hover(
+        function() { 
+            const currentText = $(this).text();
+            const otherText = $("#pierwszy").text();
+            $(this).data("originalText", currentText).text(otherText);
+        },
+        function() { 
+            const originalText = $(this).data("originalText");
+            $(this).text(originalText);
+        }
+    );
+});
+</script>
+<p id="pierwszy" class="przyklad" style="float:left; width:100px; background-color:#CCC; margin:15px; padding:15px;">Paragraf A</p>
+<p id="drugi" class="przyklad" style="float:left; width:100px; background-color:#CCC; margin:15px; padding:15px;">Paragraf B</p>
+</body>
+</html>
